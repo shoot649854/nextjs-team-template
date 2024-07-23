@@ -1,0 +1,12 @@
+{
+  "entry": ["src/**/*.ts", "src/**/*.tsx"],
+  "project": "tsconfig.json",
+  "ignore": [
+    "node_modules", 
+    "postcss.config.js", 
+    "postcss.config.mjs", 
+    "eslint.config.mjs", 
+    ".eslintrc.json"],
+  "ignoreBinaries": ["only-allow", "poetry", "jest"],
+  "ignoreDependencies": ["hidden-package", "Unlisted binaries"]
+}
