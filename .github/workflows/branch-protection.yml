@@ -1,0 +1,32 @@
+name: Set Branch Protection Rules
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  set-branch-protection:
+  # https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read branch protection rules
+        id: read_rules
+        run: |
+          rules=$(jq -c . .github/rules/personal-branch-protection.json)
+          echo "rules=$rules" >> $GITHUB_ENV
+
+      - name: Set branch protection rules
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          RULES: ${{ env.rules }}
+        run: |
+          echo $RULES | jq . # This line is optional, it helps in debugging by printing the rules
+          curl -X PUT -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          https://api.github.com/repos/${{ github.repository }}/branches/main/protection \
+          -d "$RULES"

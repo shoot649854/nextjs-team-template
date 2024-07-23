@@ -1,0 +1,47 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run dev:local --port 3000",
+    "dev:local": "next dev",
+    "dev:mock": "pnpm dlx tsx ./src/mocks/server.ts",
+    "build": "next build",
+    "start": "pnpm run dev:mock | next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "check:format": "prettier --check .",
+    "check:knip": "knip --reporter markdown",
+    "check:type": "tsc --noEmit",
+    "check:all": "pnpm run lint && pnpm run check:format && pnpm run check:type && pnpm run check:knip",
+    "test": "vitest --run",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^6.4.7",
+    "@testing-library/react": "^16.0.0",
+    "@types/jest": "^29.5.12",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-no-relative-import-paths": "^1.5.5",
+    "eslint-plugin-unused-imports": "^4.0.1",
+    "knip": "^5.26.0",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "vitest": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "jsdom": "^24.1.1",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
